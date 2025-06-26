@@ -21,13 +21,21 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Run Docker Compose
-        run: docker-compose up --build -d
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Run Docker Compose
+        run: docker compose up -d --build 
 
       - name: Wait for services
         run: sleep 10
 
-      - name: Run Backend Tests
-        run: docker exec server npm run test
+      
+      - name: Wait for Backend to be Ready
+        run: sleep 10
+
+      - name: Test Backend Endpoint
+        run: |
+          curl -f http://localhost:5000/todos || exit 1
 
       

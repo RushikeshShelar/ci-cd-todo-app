@@ -7,5 +7,6 @@ COPY . .
 
 # Stage 2: Production
 EXPOSE 3000
+CMD ["npm", "run", "test"]
 CMD ["node", "index.js"]
 
