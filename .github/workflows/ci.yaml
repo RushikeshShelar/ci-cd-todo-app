@@ -26,16 +26,12 @@ jobs:
 
       - name: Build and Run Docker Compose
         run: docker compose up -d --build 
-
-      - name: Wait for services
-        run: sleep 10
-
       
       - name: Wait for Backend to be Ready
         run: sleep 10
 
       - name: Test Backend Endpoint
         run: |
-          curl -f http://localhost:5000/todos || exit 1
+          curl -f http://localhost:3000/todos || exit 1
 
       
