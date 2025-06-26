@@ -9,6 +9,8 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    env:
+      MONGO_URI: ${{ secrets.MONGO_URI }}
 
     steps:
       - name: Checkout Code
@@ -19,18 +21,13 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Install Server Dependencies
-        working-directory: server
-        run: npm install
+      - name: Run Docker Compose
+        run: docker-compose up --build -d
+
+      - name: Wait for services
+        run: sleep 10
 
       - name: Run Backend Tests
-        working-directory: server
-        run: npm run test
-      
-      - name: Install Client Dependencies
-        working-directory: client
-        run: npm install
+        run: docker exec server npm run test
 
-      - name: Build Frontend
-        working-directory: client
-        run: npm run build
+      
