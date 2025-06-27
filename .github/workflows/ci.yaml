@@ -1,16 +1,13 @@
-name: CI Pipeline (Run Tests and Build)
+name: CI (Run Tests and Build)
 
 on:
-  push: 
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_call:
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     name: Build and Test Application
-    
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4

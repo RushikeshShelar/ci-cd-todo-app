@@ -1,10 +1,7 @@
-name: CD Pipeline (Build and Push Docker Image)
+name: CD (Build and Push Docker Image)
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_call:
 
 jobs:
   docker-push:
@@ -23,16 +20,16 @@ jobs:
 
       - name: Build and Tag Backend (Server) Docker Image
         run: |
-         docker build -t ${{ vars.DOCKER_USERNAME }}/todoapp-backend:latest ./server
+         docker build -t ${{ vars.DOCKER_USERNAME }}/todoapp-backend:v3 ./server
 
       - name: Build and Tag Frontend (Client) Docker Image
         run: |
-         docker build -t ${{ vars.DOCKER_USERNAME }}/todoapp-frontend:latest ./client 
+          docker build --build-arg VITE_API_BASE_URL=http://13.235.100.32:3000 -t ${{ vars.DOCKER_USERNAME }}/todoapp-frontend:v2 ./client
 
       - name: Push backend image
         run: |
-          docker push ${{ vars.DOCKER_USERNAME }}/todoapp-backend:latest
+          docker push ${{ vars.DOCKER_USERNAME }}/todoapp-backend:v3
 
       - name: Push frontend image
         run: |
-          docker push ${{ vars.DOCKER_USERNAME }}/todoapp-frontend:latest
+          docker push ${{ vars.DOCKER_USERNAME }}/todoapp-frontend:v3
