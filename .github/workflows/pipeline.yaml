@@ -17,9 +17,6 @@ jobs:
   deploy:
     needs: cd
     uses: ./.github/workflows/deploy.yaml
-    secrets: 
-      EC2_HOST: ${{ secrets.EC2_HOST }}
-      EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
-      EC2_KEY: ${{ secrets.EC2_KEY }}
+    environment: production
 
     
