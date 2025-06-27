@@ -11,8 +11,15 @@ jobs:
   cd:
     needs: ci
     uses: ./.github/workflows/cd.yaml
+    secrets:
+      DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
   deploy:
     needs: cd
     uses: ./.github/workflows/deploy.yaml
+    secrets: 
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+      EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
+      EC2_KEY: ${{ secrets.EC2_KEY }}
+
     
