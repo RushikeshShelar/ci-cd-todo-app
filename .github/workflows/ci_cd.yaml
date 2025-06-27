@@ -72,7 +72,7 @@ jobs:
             sudo systemctl enable --now docker
             sudo apt install -y docker-compose
 
-            echo ${{ secrets.DOCKER_PASSWORD }} | sudo docker login -u ${{ vars.DOCKER_USERNAME }} --password-stdin
+            echo "${{ secrets.DOCKER_PASSWORD }}" | sudo docker login -u "${{ vars.DOCKER_USERNAME }}" --password-stdin
             cd ~/todoapp/
             sudo docker-compose pull
             sudo docker-compose down
