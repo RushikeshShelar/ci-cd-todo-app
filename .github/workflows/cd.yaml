@@ -2,6 +2,9 @@ name: CD (Build and Push Docker Image)
 
 on:
   workflow_call:
+    secrets:
+      DOCKER_ACCESS_TOKEN:
+        required: true
 
 jobs:
   docker-push:
