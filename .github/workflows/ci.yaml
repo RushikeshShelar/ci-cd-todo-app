@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI Pipeline (Run Tests and Build)
 
 on:
   push: 
@@ -9,9 +9,8 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    env:
-      MONGO_URI: ${{ secrets.MONGO_URI }}
-
+    name: Build and Test Application
+    
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
