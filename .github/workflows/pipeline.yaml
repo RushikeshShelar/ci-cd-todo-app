@@ -17,6 +17,3 @@ jobs:
   deploy:
     needs: cd
     uses: ./.github/workflows/deploy.yaml
-    environment: production
-
-    

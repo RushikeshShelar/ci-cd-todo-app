@@ -12,6 +12,7 @@ on:
 
 jobs: 
   build-push-deploy:
+    environment: production
     runs-on: ubuntu-latest
     name: Test, Build, Push Docker Images and Deploy to EC2
 
