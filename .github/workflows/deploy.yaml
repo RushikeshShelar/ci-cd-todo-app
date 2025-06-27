@@ -16,6 +16,9 @@ jobs:
     name: Test, Build, Push Docker Images and Deploy to EC2
 
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: Copy docker-compose to EC2 (scp)
         uses: appleboy/scp-action@v1
         with:
