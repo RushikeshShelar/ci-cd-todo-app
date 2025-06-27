@@ -9,7 +9,8 @@ on:
 jobs:
   docker-push:
     runs-on: ubuntu-latest
-
+    name: Build and Push Docker Images
+    
     steps:
       - name: Checkout Code
       - uses: actions/checkout@v4
