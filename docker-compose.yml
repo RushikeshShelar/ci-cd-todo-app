@@ -1,9 +1,9 @@
 services:
   backend:
-    image: rushikshelar/todo-backend:latest
+    image: rushikeshshelar/todoapp-backend:latest
     ports:
       - "5000:5000"
   frontend:
-    image: rushikshelar/todo-frontend:latest
+    image: rushikeshshelar/todoapp-frontend:latest
     ports:
       - "3000:3000"
