@@ -2,13 +2,6 @@ name: Deploy (Pull and Restart Docker Containers)
 
 on:
   workflow_call:
-    secrets:
-      EC2_HOST:
-        required: true
-      EC2_USERNAME:
-        required: true
-      EC2_KEY:
-        required: true
 
 jobs: 
   build-push-deploy:
