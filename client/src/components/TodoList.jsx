@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const API = import.meta.env.VITE_API_BASE_URL || "http://locahost:3000" + "/todos";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+const API = `${API_BASE}/todos`;
 
 const TodoList = () => {
     const [todos, setTodos] = useState([]);
