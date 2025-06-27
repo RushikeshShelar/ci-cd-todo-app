@@ -44,13 +44,13 @@ jobs:
 
       - name: Build, Tag and Push Backend (Server) Docker Image
         run: |
-          docker build -t ${{ vars.DOCKER_USERNAME }}/todoapp-backend:latest ./server
-          docker push ${{ vars.DOCKER_USERNAME }}/todoapp-backend:latest
+          docker build -t ${{ vars.DOCKER_USERNAME }}/todoapp-backend:v1 ./server
+          docker push ${{ vars.DOCKER_USERNAME }}/todoapp-backend:v1
 
       - name: Build, Tag and Push Frontend (Client) Docker Image
         run: |
-          docker build -t ${{ vars.DOCKER_USERNAME }}/todoapp-frontend:latest ./client
-          docker push ${{ vars.DOCKER_USERNAME }}/todoapp-frontend:latest
+          docker build -t ${{ vars.DOCKER_USERNAME }}/todoapp-frontend:v1 ./client
+          docker push ${{ vars.DOCKER_USERNAME }}/todoapp-frontend:v1
 
       - name: Copy docker-compose to EC2 (scp)
         uses: appleboy/scp-action@v1
@@ -68,11 +68,6 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            sudo apt update && sudo apt install -y docker.io
-            sudo systemctl enable --now docker
-            sudo apt install -y docker-compose
-
-            echo "${{ secrets.DOCKER_PASSWORD }}" | sudo docker login -u "${{ vars.DOCKER_USERNAME }}" --password-stdin
             cd ~/todoapp/
             sudo docker-compose pull
             sudo docker-compose down
