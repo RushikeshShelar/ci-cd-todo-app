@@ -1,26 +1,9 @@
 services:
   backend:
-    build: ./server
-    ports: 
-      - "3000:3000"
-    environment:
-      - MONGO_URI=${MONGO_URI}
-    depends_on:
-      - mongo
-    
+    image: rushikshelar/todo-backend:latest
+    ports:
+      - "5000:5000"
   frontend:
-    build: ./client
+    image: rushikshelar/todo-frontend:latest
     ports:
-      - "8080:80"
-    depends_on:
-      - backend
-  
-  mongo:
-    image: mongo:6
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
-
-volumes:
-  mongo-data:
+      - "3000:3000"
