@@ -1,0 +1,37 @@
+name: CD Pipeline (Build and Push Docker Image)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  docker-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+      - uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-activity@v3
+        with: 
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+
+      - name: Build and Tag Backend (Server) Docker Image
+        run: |
+         docker build -t ${{ secrets.DOCKER_USERNAME }}/todoapp-backend:latest ./server
+
+      - name: Build and Tag Frontend (Client) Docker Image
+        run: |
+         docker build -t ${{ secrets.DOCKER_USERNAME }}/todoapp-frontend:latest ./client 
+
+      - name: Push backend image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/todo-backend:latest
+
+      - name: Push frontend image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/todo-frontend:latest
