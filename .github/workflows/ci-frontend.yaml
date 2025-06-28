@@ -1,4 +1,4 @@
-name: CI (Run Tests and Build)
+name: CI-Frontend (Build Frontend Application)
 
 on:
   workflow_call:

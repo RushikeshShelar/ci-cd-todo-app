@@ -1,4 +1,4 @@
-name: CD (Build and Push Docker Image)
+name: CD-Backend (Push Backend Docker Image)
 
 on:
   workflow_call:
@@ -13,7 +13,7 @@ on:
 jobs:
   docker-push-server:
     runs-on: ubuntu-latest
-    name: Build and Push Docker Images
+    name: Push Backend Docker Image
 
     steps:
       - name: Checkout Code

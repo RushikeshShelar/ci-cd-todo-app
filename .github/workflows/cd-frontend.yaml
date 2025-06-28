@@ -1,4 +1,4 @@
-name: CD (Build and Push Docker Image)
+name: CD-Frontend (Push Frontend Docker Image)
 
 on:
   workflow_call:
@@ -12,6 +12,7 @@ on:
 
 jobs:
   docker-push-client:
+    name: Push Frontend Docker Image
     runs-on: ubuntu-latest
 
     steps:
