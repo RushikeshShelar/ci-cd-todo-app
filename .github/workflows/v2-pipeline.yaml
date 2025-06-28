@@ -10,16 +10,16 @@ on:
 
 jobs:
   ci:
-    uses: ./.github/workflows/v2-non-linear/ci.yaml
+    uses: ./.github/workflows/ci.yaml
     secrets: inherit
 
   cd:
-    uses: ./.github/workflows/v2-non-linear/cd.yaml
+    uses: ./.github/workflows/cd.yaml
     secrets: inherit
     needs: ci
 
   deploy:
-    uses: ./.github/workflows/v2-non-linear/deploy.yaml
+    uses: ./.github/workflows/deploy.yaml
     secrets: inherit
     needs: cd
   
