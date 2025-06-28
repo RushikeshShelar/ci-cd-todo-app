@@ -31,6 +31,6 @@ jobs:
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit
     needs: 
-      - ci-frontend
-      - ci-backend
+      - cd-frontend
+      - cd-backend
   
