@@ -1,0 +1,28 @@
+name: CI / CD Pipeline (Run Tests, Build, Push Docker Images and Deploy to EC2)
+
+on: 
+  # push:
+  #   branches: [main]
+  # pull_request:
+  #   branches: [main]
+  workflow_dispatch:
+    secrets:
+      DOCKER_ACCESS_TOKEN:
+        required: true
+  
+
+jobs:
+  ci: 
+    uses: ./.github/workflows/ci.yaml
+
+  cd:
+    needs: ci
+    uses: ./.github/workflows/cd.yaml
+    secrets:
+      DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+
+  deploy:
+    needs: cd
+    uses: ./.github/workflows/deploy.yaml
+
+    
