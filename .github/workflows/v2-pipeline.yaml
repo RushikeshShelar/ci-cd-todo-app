@@ -16,16 +16,16 @@ jobs:
   v1-cd:
     uses: ./.github/workflows/cd.yaml
     secrets: inherit
+    needs: v1-ci
 
   v2-ci:
     uses: ./.github/workflows/v2-ci.yaml
     secrets: inherit
-    needs: ci
 
   v2-cd:
     uses: ./.github/workflows/v2-cd.yaml
     secrets: inherit
-    needs: cd
+    needs: v2-ci
 
   deploy:
     uses: ./.github/workflows/deploy.yaml
