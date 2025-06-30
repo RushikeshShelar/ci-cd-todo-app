@@ -1,12 +1,13 @@
 name: CI/CD Workflow Pipeline
 
 on: 
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
+  # pull_request:
+  #   branches:
+  #     - main
+  workflows_dispatch:
 
 jobs:
   ci-frontend:
