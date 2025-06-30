@@ -1,6 +1,6 @@
 pipeline{
     agent {
-        docker-node {
+        docker {
             image 'yourdocker/jenkins-agent:node'
             args '-u root'  // if permissions or npm global install issues
         }
