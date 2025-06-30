@@ -2,8 +2,7 @@ pipeline{
     agent any
 
     environment {
-        DOCKERHUB_USER = credentials('dockerhub-creds').username
-        DOCKERHUB_PASS = credentials('dockerhub-creds').password
+        DOCKER_CREDENTIALS = credentials('dockerhub-creds')
         EC2_HOST = credentials('EC2_HOST')
         EC2_USER = credentials('EC2_USERNAME')
         SSH_KEY = credentials('ec2-ssh-key')
@@ -45,7 +44,7 @@ pipeline{
         stage('CD: Docker Login') {
             steps {
                 sh '''
-                echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
+                echo "$DOCKER_CREDENTIALS_PSW" | docker login -u "$DOCKER_CREDENTIALS_USR" --password-stdin
                 '''
             }
         }   
@@ -55,16 +54,16 @@ pipeline{
                 stage('CD: Backend Image'){
                     steps {
                         sh '''
-                        docker build -t $DOCKERHUB_USER/todoapp-backend:jenkins ./server
-                        sh docker push $DOCKERHUB_USER/todoapp-backend:jenkins
+                        docker build -t $DOCKER_CREDENTIALS_USR/todoapp-backend:jenkins ./server
+                        sh docker push $DOCKER_CREDENTIALS_USR/todoapp-backend:jenkins
                         '''
                     }
                 }
                 stage('CD: Frontend Image'){
                     steps {
                         sh '''
-                        docker build -t $DOCKERHUB_USER/todoapp-frontend:jenkins ./client
-                        docker push $DOCKERHUB_USER/todoapp-frontend:jenkins
+                        docker build -t $DOCKER_CREDENTIALS_USR/todoapp-frontend:jenkins ./client
+                        docker push $DOCKER_CREDENTIALS_USR/todoapp-frontend:jenkins
                         '''
                     }
                 }
