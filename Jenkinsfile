@@ -1,7 +1,7 @@
 pipeline{
     agent {
         docker {
-            image 'rushikshelar/jenkins-agent:node'     // optional: if using specific agent labels
+            image 'rushikeshshelar/jenkins-agent:node'     // optional: if using specific agent labels
             args '-u root'
             reuseNode false
         }
