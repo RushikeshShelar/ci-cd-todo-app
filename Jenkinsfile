@@ -1,5 +1,10 @@
 pipeline{
-    agent any
+    agent {
+        docker-node {
+            image 'yourdocker/jenkins-agent:node'
+            args '-u root'  // if permissions or npm global install issues
+        }
+    }
 
     environment {
         DOCKER_CREDENTIALS = credentials('dockerhub-creds')
