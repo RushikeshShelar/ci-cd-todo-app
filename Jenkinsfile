@@ -1,7 +1,7 @@
 pipeline{
     agent any
 
-    enviornment {
+    environment {
         DOCKERHUB_USER = credentials('dockerhub-creds').username
         DOCKERHUB_PASS = credentials('dockerhub-creds').password
         EC2_HOST = credentials('EC2_HOST')
